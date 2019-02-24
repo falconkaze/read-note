@@ -1,12 +1,14 @@
 import java.util.function.Supplier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConcurrentIncrement {
 
   private static int excutorNum = 10;
   private static ExecutorService executorService = Executors.newFixedThreadPool(excutorNum);
   private static int num;
+  private static AtomicInteger atomicInteger = new AtomicInteger();
 
   public static void main(String[] args) {
     concurrentExecution();
@@ -15,7 +17,8 @@ public class ConcurrentIncrement {
 
   private static void concurrentExecution(){
     for(int i = 0; i < excutorNum; i ++){
-      executorService.submit(ConcurrentIncrement::syncIncrement);
+      //executorService.submit(ConcurrentIncrement::syncIncrement);
+      executorService.submit(ConcurrentIncrement::atomicIncrement);
     }
   }
 
@@ -35,5 +38,11 @@ public class ConcurrentIncrement {
     System.out.println(num);
   }
 
+  /**
+   * 使用AtomicInteger来保证线程anquan.
+   */
+  private static void atomicIncrement(){
+    System.out.println(atomicInteger.addAndGet(1));
+  }
 
 }
