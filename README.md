@@ -7,6 +7,7 @@
 ## java
 
 java编程思想(thinking-in-java)
+java并发编程实战（Java Concurrent in Practice）
 
 ## 数据库相关
 
